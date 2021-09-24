@@ -1,6 +1,6 @@
 import React from 'react';
 
-export class fetchFromAPI extends React.Component {
+export class FetchFromAPI extends React.Component {
     state = {
         url: 'https://gitlab.stud.idi.ntnu.no/api/v4/projects/11911/',
         token: 'GSK4CqSZCdZGPz4NsAHw',
@@ -31,6 +31,7 @@ export class fetchFromAPI extends React.Component {
             loading: false,
             payload: data
         })
+        console.log(this.state.payload);
         //let data = await returnStatus(response.json())
         // .catch(error)
     }
@@ -45,7 +46,11 @@ export class fetchFromAPI extends React.Component {
                         {payload[5]}
                     </div>
                 }
+                <div>
+                    <button onClick={this.getRepository}>Press me </button>
+                </div>
 			</div>
+            
 		);
 	}
 }

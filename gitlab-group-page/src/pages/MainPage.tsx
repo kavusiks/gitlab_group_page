@@ -10,6 +10,7 @@ export const MainPage: FunctionComponent = () => {
       <Row>
         <Col md={2}>
           <hr className="w-75 m-1 mt-3 mb-3" />
+          {/* ha logg inn page her*/}
         </Col>
       </Row>
     </>

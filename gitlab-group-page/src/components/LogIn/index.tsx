@@ -16,7 +16,7 @@ function LogIn() {
   );
 
   async function loginUserCallBack() {
-    
+    localStorage.setItem("Group Information", JSON.stringify(values));
   }
 
   return(

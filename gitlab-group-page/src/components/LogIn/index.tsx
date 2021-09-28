@@ -16,13 +16,13 @@ function LogIn() {
   );
 
   async function loginUserCallBack() {
-  
+    
   }
 
   return(
     <div className="wrapper">
       <form onSubmit={onSubmit}>
-        <div className="container">
+        <div className="innercontainer">
           <h1> Welcome to your Gitlab Group Page </h1>
           <div className="form-group">
             <div className="row"> 

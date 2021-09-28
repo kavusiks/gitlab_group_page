@@ -42,6 +42,12 @@ export class FetchFromAPI extends React.Component {
         getElements();
 
         console.log(this.state.payload);
+        const getElements = async () => {
+            const test = await fetchAPI(11911, 'GSK4CqSZCdZGPz4NsAHw')
+            console.log(test)
+        }
+        getElements();
+
         //let data = await returnStatus(response.json())
         // .catch(error)
     }
@@ -57,5 +63,17 @@ export class FetchFromAPI extends React.Component {
 		return (
 			<div>
 				{loading && <div>Loading...</div>}
+                {!loading &&
+                    <div >
+                        <ul>
+                            {listItems}
+                        </ul>
+                    </div>
+                }
+                <div>
+                    <button onClick={this.getRepository}> Press me </button>
+                </div>
 			</div>
 		);
+	}
+}

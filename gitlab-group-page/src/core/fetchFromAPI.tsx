@@ -1,7 +1,6 @@
 import React from 'react';
 import { fetchAPI } from './APIfunction';
 export class FetchFromAPI extends React.Component {
-
     state = {
         url: 'https://gitlab.stud.idi.ntnu.no/api/v4/projects/11911/',
         token: 'GSK4CqSZCdZGPz4NsAHw',
@@ -33,13 +32,6 @@ export class FetchFromAPI extends React.Component {
             loading: false,
             payload: data
         })
-
-        console.log(this.state.payload);
-        const getElements = async () => {
-            const test = await fetchAPI(11911, 'GSK4CqSZCdZGPz4NsAHw')
-            console.log(test)
-        }
-        getElements();
 
         console.log(this.state.payload);
         const getElements = async () => {

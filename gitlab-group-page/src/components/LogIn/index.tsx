@@ -1,11 +1,12 @@
 import React from "react";
 import { useForm } from "../../context/FormHook";
+import { fetchProject } from "../../core/APIfunction";
 import "./index.css";
 
 function LogIn() {
 
   const initialState = {
-    groupid: "",
+    groupid: 0,
     grouptoken: "",
   }
 
@@ -16,7 +17,8 @@ function LogIn() {
   );
 
   async function loginUserCallBack() {
-    
+    const temp = await fetchProject(Object(values)["groupid"], Object(values)["grouptoken"])
+    //temp kan lagres om en vil- jsonobjekt
   }
 
   return(

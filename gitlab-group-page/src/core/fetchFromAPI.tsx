@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchAPI } from './APIfunction';
+import { fetchProject } from './APIfunction';
 export class FetchFromAPI extends React.Component {
     state = {
         url: 'https://gitlab.stud.idi.ntnu.no/api/v4/projects/11911/',
@@ -35,7 +35,7 @@ export class FetchFromAPI extends React.Component {
 
         console.log(this.state.payload);
         const getElements = async () => {
-            const test = await fetchAPI(11911, 'GSK4CqSZCdZGPz4NsAHw')
+            const test = await fetchProject(11911, 'GSK4CqSZCdZGPz4NsAHw')
             console.log(test)
         }
         getElements();

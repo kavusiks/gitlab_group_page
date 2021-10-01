@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from "react";
 
 import { Row, Col } from "react-bootstrap";
-import LogIn from "../components/LogIn";
 import NavigationBar from "../components/NavigationBar";
 
 export const MainPage: FunctionComponent = () => {
@@ -9,8 +8,7 @@ export const MainPage: FunctionComponent = () => {
     <>
       <NavigationBar></NavigationBar>
       <Row>
-        <Col md={2}>
-        </Col>
+        <Col md={2}></Col>
       </Row>
     </>
   );

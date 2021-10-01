@@ -8,8 +8,7 @@ export const MainPage: FunctionComponent = () => {
     <>
       <NavigationBar></NavigationBar>
       <Row>
-        <Col md={2}>
-        </Col>
+        <Col md={2}></Col>
       </Row>
     </>
   );

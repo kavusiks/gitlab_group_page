@@ -22,6 +22,8 @@ function LogIn() {
     );
     //temp kan lagres om en vil- jsonobjekt
     localStorage.setItem("Group Information", JSON.stringify(values));
+
+    console.log(temp);
   }
 
   return (

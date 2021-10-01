@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from "react";
 
 import { Row, Col } from "react-bootstrap";
-import LogIn from "../components/LogIn";
 import NavigationBar from "../components/NavigationBar";
 
 export const MainPage: FunctionComponent = () => {

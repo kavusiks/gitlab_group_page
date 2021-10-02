@@ -1,9 +1,11 @@
 import React from "react";
 import { useForm } from "../../context/FormHook";
+
 import { fetchProject } from "../../core/APIfunction";
 import "./index.css";
 
 function LogIn() {
+  //const sessionData = DataUser();
   const initialState = {
     groupid: 0,
     grouptoken: "",

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 
 import { useForm } from "../../context/FormHook";
@@ -8,12 +8,6 @@ import { fetchProject } from "../../core/APIfunction";
 import "./index.css";
 
 function LogIn() {
-  //const sessionData = DataUser();
-
-  //const { setName } = useContext(DataContext);
-
-  //const setDescription = useContext(DataContext);
-
   const { id, setId, name, setName, description, setDescription } =
     useContext(ProjectContext);
   const history = useHistory();
@@ -40,6 +34,8 @@ function LogIn() {
     );
     //temp kan lagres om en vil- jsonobjekt
     localStorage.setItem("Group Information", JSON.stringify(values));
+    localStorage.setItem("groupid", Object(values)["groupid"]);
+    localStorage.setItem("grouptoken", Object(values)["grouptoken"]);
     setId(Object(values)["groupid"]);
     setName(temp.name);
     setDescription(temp.description);
@@ -48,9 +44,7 @@ function LogIn() {
     console.log(name);
     console.log(description);
 
-    history.push("/");
-
-    //console.log(temp.groupid);
+    if (temp.description != null && temp.name !== null) history.push("/");
   }
 
   return (

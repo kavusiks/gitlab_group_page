@@ -1,26 +1,19 @@
-import React, { FunctionComponent, useContext, useEffect } from "react";
+import React, { FunctionComponent, useContext } from "react";
 
 import { Row, Col } from "react-bootstrap";
+import { InfoView } from "../components/InfoView";
 import NavigationBar from "../components/NavigationBar";
 import { ProjectContext } from "../context/ProjectContext";
 
-//import { UseDataContext, DataProvider } from "../context/SessionData";
-
 export const MainPage: FunctionComponent = () => {
-  const { id, name, description, setDescription } = useContext(ProjectContext);
-  console.log("Nåå");
-  console.log(name);
-  console.log(id);
-  console.log(description);
+  const { id, name, description } = useContext(ProjectContext);
 
   return (
     <>
       <NavigationBar></NavigationBar>
       <Row>
+        <InfoView id={id} name={name} description={description} />
         <Col md={2}></Col>
-        <h1>{id} </h1>
-        <h1>{name} </h1>
-        <h1>{description} </h1>
       </Row>
     </>
   );

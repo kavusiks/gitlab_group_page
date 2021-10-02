@@ -1,29 +1,29 @@
-import React, { useEffect } from "react";
-import { useForm } from "../FormHook";
-//import { fetchProject } from "../../core/APIfunction";
+import React from "react";
+import { useForm } from "../../components/FormHook";
+
+import { fetchProject } from "../../core/APIfunction";
 import "./index.css";
-import image from '../../assets/img/teaser-gitlab-cover.png';
+import image from "../../assets/img/teaser-gitlab-cover.png";
 import { useHistory } from "react-router-dom";
+import { useEffect } from "react";
 
 function LogIn() {
-
   const history = useHistory();
 
   useEffect(() => {
-
-    if (!(localStorage.getItem("Group ID")===null) && !(localStorage.getItem("Group Access Token")===null) ) {
-      history.push('/main-page');
+    if (
+      !(localStorage.getItem("Group ID") === null) &&
+      !(localStorage.getItem("Group Access Token") === null)
+    ) {
+      history.push("/main-page");
     } else {
-      history.push('/');
+      history.push("/");
     }
   });
   const initialState = {
     groupid: 0,
     grouptoken: "",
   };
-
-
-  
 
   // eslint-disable-next-line
   const { onChange, onSubmit, values } = useForm(
@@ -49,7 +49,13 @@ function LogIn() {
         <div className="container">
           <div className="row">
             <div className="col img-col">
-              <img src={image} alt="Gitlab logo" width="40vh" height="20vh" className="login-image"/>
+              <img
+                src={image}
+                alt="Gitlab logo"
+                width="40vh"
+                height="20vh"
+                className="login-image"
+              />
             </div>
             <div className="col form-col">
               <form onSubmit={onSubmit}>
@@ -80,34 +86,30 @@ function LogIn() {
                           Group Access Token
                         </label>
                       </div>
-                <div className="col-right">
-                  <input
-                    name="grouptoken"
-                    id="grouptoken"
-                    type="text"
-                    placeholder="Ex: xxGWKwsM1A6MHobbwDey"
-                    onChange={onChange}
-                    required
-                  />
+                      <div className="col-right">
+                        <input
+                          name="grouptoken"
+                          id="grouptoken"
+                          type="text"
+                          placeholder="Ex: xxGWKwsM1A6MHobbwDey"
+                          onChange={onChange}
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div className="form-row">
+                      <button type="submit" className="login-btn">
+                        Log In
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="form-row">
-                <button
-                type="submit" 
-                className="login-btn" 
-                >
-                  Log In
-                </button>
-              </div>
-            </div>
-          </div>
-          </form>
+              </form>
             </div>
           </div>
         </div>
       </div>
     </div>
-      
   );
 }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm } from "../../context/FormHook";
+import { useForm } from "../FormHook";
 import { fetchProject } from "../../core/APIfunction";
 import "./index.css";
 
@@ -21,7 +21,8 @@ function LogIn() {
       Object(values)["grouptoken"]
     );
     //temp kan lagres om en vil- jsonobjekt
-    localStorage.setItem("Group Information", JSON.stringify(values));
+    localStorage.setItem("Group ID", Object(values)["groupid"]);
+    localStorage.setItem("Group Access Token", Object(values)["grouptoken"]);
 
     console.log(temp);
   }

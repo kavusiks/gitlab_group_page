@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useForm } from "../../components/FormHook";
+
+import { ProjectContext } from "../../context/ProjectContext";
 
 import { fetchProject } from "../../core/APIfunction";
 import "./index.css";
 import image from "../../assets/img/teaser-gitlab-cover.png";
-import { useHistory } from "react-router-dom";
-import { useEffect } from "react";
 
 function LogIn() {
   const history = useHistory();
@@ -20,6 +21,15 @@ function LogIn() {
       history.push("/");
     }
   });
+  //const sessionData = DataUser();
+
+  //const { setName } = useContext(DataContext);
+
+  //const setDescription = useContext(DataContext);
+
+  const { id, setId, name, setName, description, setDescription } =
+    useContext(ProjectContext);
+
   const initialState = {
     groupid: 0,
     grouptoken: "",
@@ -40,6 +50,27 @@ function LogIn() {
       Object(values)["grouptoken"]
     );
     //temp kan lagres om en vil- jsonobjekt*/
+    console.log("Før");
+    console.log(id);
+    console.log(name);
+    console.log(description);
+    const temp = await fetchProject(
+      Object(values)["groupid"],
+      Object(values)["grouptoken"]
+    );
+    //temp kan lagres om en vil- jsonobjekt
+
+    setId(Object(values)["groupid"]);
+    setName(temp.name);
+    setDescription(temp.description);
+    console.log("Etter");
+    console.log(initialState.groupid);
+    console.log(name);
+    console.log(description);
+
+    history.push("/");
+
+    //console.log(temp.groupid);
   }
 
   return (

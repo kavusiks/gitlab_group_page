@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent, useContext, useEffect } from "react";
 
 import { Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router";
@@ -6,6 +6,7 @@ import NavigationBar from "../components/NavigationBar";
 import { fetchProject } from "../core/APIfunction";
 
 export const MainPage: FunctionComponent = () => {
+  const { id, name, description, setDescription } = useContext(ProjectContext);
   const history = useHistory();
   const [validAPI, setValidAPI] = useState(true);
 
@@ -50,6 +51,9 @@ export const MainPage: FunctionComponent = () => {
       <NavigationBar></NavigationBar>
       <Row>
         <Col md={2}></Col>
+        <h1>{id} </h1>
+        <h1>{name} </h1>
+        <h1>{description} </h1>
       </Row>
     </>
   );

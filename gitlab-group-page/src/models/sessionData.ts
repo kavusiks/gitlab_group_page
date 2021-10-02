@@ -2,16 +2,19 @@ export default interface SessionData {
   /**
    * GroupID
    */
-  id?: number;
+  id: number;
+
+  setId: (value: number) => void;
+  setName: (value: string) => void;
+  setDescription: (value: string) => void;
 
   /**
    * Project Name
    */
-  name?: string;
+  name: string;
 
   /**
    * Project description
    */
-  description?: string;
-  updateData: () => void;
+  description: string;
 }

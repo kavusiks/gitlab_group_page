@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+
 import { useForm } from "../../context/FormHook";
+import { ProjectContext } from "../../context/ProjectContext";
 
 import { fetchProject } from "../../core/APIfunction";
 import "./index.css";
 
 function LogIn() {
   //const sessionData = DataUser();
+
+  //const { setName } = useContext(DataContext);
+
+  //const setDescription = useContext(DataContext);
+
+  const { id, setId, name, setName, description, setDescription } =
+    useContext(ProjectContext);
+  const history = useHistory();
+
   const initialState = {
     groupid: 0,
     grouptoken: "",
@@ -18,14 +30,27 @@ function LogIn() {
   );
 
   async function loginUserCallBack() {
+    console.log("Før");
+    console.log(id);
+    console.log(name);
+    console.log(description);
     const temp = await fetchProject(
       Object(values)["groupid"],
       Object(values)["grouptoken"]
     );
     //temp kan lagres om en vil- jsonobjekt
     localStorage.setItem("Group Information", JSON.stringify(values));
+    setId(Object(values)["groupid"]);
+    setName(temp.name);
+    setDescription(temp.description);
+    console.log("Etter");
+    console.log(initialState.groupid);
+    console.log(name);
+    console.log(description);
 
-    console.log(temp);
+    history.push("/");
+
+    //console.log(temp.groupid);
   }
 
   return (

@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "../FormHook";
 import { fetchProject } from "../../core/APIfunction";
 import "./index.css";
+import image from '../../assets/img/teaser-gitlab-cover.png';
+import { useHistory } from "react-router-dom";
 
 function LogIn() {
+
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!(localStorage.getItem("Group ID")===null) && !(localStorage.getItem("Group Access Token")===null) ) {
+      history.push('/main-page');
+    } else {
+      history.push('/');
+    }
+  });
   const initialState = {
     groupid: 0,
     grouptoken: "",
   };
+
+
+  
 
   // eslint-disable-next-line
   const { onChange, onSubmit, values } = useForm(
@@ -16,67 +31,83 @@ function LogIn() {
   );
 
   async function loginUserCallBack() {
+    localStorage.setItem("Group ID", Object(values)["groupid"]);
+    localStorage.setItem("Group Access Token", Object(values)["grouptoken"]);
+
     const temp = await fetchProject(
       Object(values)["groupid"],
       Object(values)["grouptoken"]
     );
     //temp kan lagres om en vil- jsonobjekt
-    localStorage.setItem("Group ID", Object(values)["groupid"]);
-    localStorage.setItem("Group Access Token", Object(values)["grouptoken"]);
-
-    console.log(temp);
+    console.log(temp.message);
   }
 
   return (
-    <div className="wrapper">
-      <form onSubmit={onSubmit}>
-        <div className="innercontainer">
-          <h1> Welcome to your Gitlab Group Page </h1>
-          <div className="form-group">
-            <div className="row">
-              <div className="col-left">
-                <label htmlFor="groupid" id="group-id">
-                  Group-ID
-                </label>
+    <div className="body">
+      <h1>Welcome to your Gitlab Group Page</h1>
+      <div className="wrapper">
+        <div className="container">
+          <div className="row">
+            <div className="col">
+              <img src={image} alt="Gitlab logo" width="40vh" height="20vh" className="login-image"/>
+            </div>
+            <div className="col form-col">
+              <form onSubmit={onSubmit}>
+                <h2>Log in </h2>
+                <div className="innercontainer">
+                  <div className="form-group">
+                    <div className="form-row">
+                      <div className="col-left">
+                        <label htmlFor="groupid" id="group-id">
+                          Group-ID
+                        </label>
+                      </div>
+                      <div className="col-right">
+                        <input
+                          name="groupid"
+                          id="groupid"
+                          type="number"
+                          placeholder="Ex: 11911"
+                          onChange={onChange}
+                          required
+                          min="1"
+                        />
+                      </div>
+                    </div>
+                    <div className="form-row">
+                      <div className="col-left">
+                        <label htmlFor="grouptoken" id="group-token">
+                          Group Access Token
+                        </label>
+                      </div>
+                <div className="col-right">
+                  <input
+                    name="grouptoken"
+                    id="grouptoken"
+                    type="text"
+                    placeholder="Ex: xxGWKwsM1A6MHobbwDey"
+                    onChange={onChange}
+                    required
+                  />
+                </div>
               </div>
-              <div className="col-right">
-                <input
-                  name="groupid"
-                  id="groupid"
-                  type="number"
-                  placeholder="Ex: 11911"
-                  onChange={onChange}
-                  required
-                  min="1"
-                />
+              <div className="form-row">
+                <button
+                type="submit" 
+                className="login-btn" 
+                >
+                  Log In
+                </button>
               </div>
             </div>
-            <div className="row">
-              <div className="col-left">
-                <label htmlFor="grouptoken" id="group-token">
-                  Group Access Token
-                </label>
-              </div>
-              <div className="col-right">
-                <input
-                  name="grouptoken"
-                  id="grouptoken"
-                  type="text"
-                  placeholder="Ex: xxGWKwsM1A6MHobbwDey"
-                  onChange={onChange}
-                  required
-                />
-              </div>
-            </div>
-            <div className="row">
-              <button type="submit" className="btn btn-primary">
-                Log In
-              </button>
+          </div>
+          </form>
             </div>
           </div>
         </div>
-      </form>
+      </div>
     </div>
+      
   );
 }
 

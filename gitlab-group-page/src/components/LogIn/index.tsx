@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useForm } from "../../components/FormHook";
 
@@ -68,9 +68,7 @@ function LogIn() {
     console.log(name);
     console.log(description);
 
-    history.push("/");
-
-    //console.log(temp.groupid);
+    if (temp.description != null && temp.name !== null) history.push("/");
   }
 
   return (

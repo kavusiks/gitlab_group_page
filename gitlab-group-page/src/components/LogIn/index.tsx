@@ -44,7 +44,7 @@ function LogIn() {
     console.log(name);
     console.log(description);
 
-    if (temp.description != null && temp.name !== null) history.push("/");
+    if (temp.description != null && temp.name !== null) history.push("/labels");
   }
 
   return (

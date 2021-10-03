@@ -31,7 +31,7 @@ export const LabelView: FunctionComponent<LabelProps> = ({
  */
 export interface LabelListViewProps {
   /**
-   * The ads to display in the list view
+   * The labels to display in the list view
    */
   labels: Label[];
 }
@@ -47,8 +47,9 @@ export const LabelListView: FunctionComponent = ({}) => {
       fetchLabels(parseInt(id), token).then((items) => setAllLabels(items));
       //console.log(fetchLabels(parseInt(id), token));
       //console.log(fetchProject(parseInt(id), token));
+      console.log("apikall");
     }
-  }, []);
+  }, [id, token]);
 
   return (
     <div>

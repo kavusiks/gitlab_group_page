@@ -3,8 +3,9 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import LogInPage from "./pages/LogInPage";
 import { useState } from "react";
-import MainPage from "./pages/MainPage";
+import LabelPage from "./pages/LabelPage";
 import { ProjectContext } from "./context/ProjectContext";
+import IssuePage from "./pages/IssuePage";
 
 function App() {
   const [id, setId] = useState<number>(0);
@@ -21,8 +22,11 @@ function App() {
             <Route path="/login">
               <LogInPage />
             </Route>
-            <Route path="/">
-              <MainPage />
+            <Route path="/labels">
+              <LabelPage />
+            </Route>
+            <Route path="/issues">
+              <IssuePage />
             </Route>
           </Switch>
         </ProjectContext.Provider>

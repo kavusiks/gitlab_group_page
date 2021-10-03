@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 
 import { Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router";
@@ -8,31 +8,49 @@ import { fetchProject } from "../core/APIfunction";
 export const MainPage: FunctionComponent = () => {
   
   const history = useHistory();
-  
+  const [validAPI, setValidAPI] = useState(true);
+
   useEffect(() => {
-    if ((localStorage.getItem("Group ID")===null) && (localStorage.getItem("Group Access Token")===null) ) {
-      history.push('/');
-    } else {
-      checkAPI();
-      history.push('/main-page');
-    }
+    switchRoutes();
   });
 
-  async function checkAPI() {
-    const temp = await fetchProject(
-      JSON.parse(localStorage.getItem('Group ID') || '{}'),
-      JSON.parse(localStorage.getItem('Group Access Token') || '{}')
-    );
-
-    if (temp.message === "401 Unauthorized") {
+  const switchRoutes = () => {
+    isValidAPI();
+    if (((localStorage.getItem("Group ID")===null) && (localStorage.getItem("Group Access Token")===null)) || (validAPI===false)) {
+      localStorage.removeItem('Group ID');
+      localStorage.removeItem('Group Access Token');
       history.push('/');
+    } else {
+      history.push('/main-page');
+    }
+  };
+
+  async function isValidAPI() {
+    var id = localStorage.getItem('Group ID') || '{}';
+    var token = localStorage.getItem('Group Access Token') || '{}';
+    const temp = await fetchProject(
+      parseInt(id),
+      token
+    );
+    let length = Object.keys(temp).length;
+    
+    if (temp.message === "401 Unauthorized") {
+      
+      setValidAPI(false);
     }
     else if (temp.message === "404 Project Not Found") {
-      history.push('/');
+      setValidAPI(false);
+    } 
+    else if (length > 1){
+      console.log("setting true");
+      setValidAPI(true);
+    }
+    else {
+      console.log("Something is wrong");
     }
 
-  }
 
+  }
   return (
     <>
       <NavigationBar></NavigationBar>

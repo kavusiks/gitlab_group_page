@@ -47,7 +47,7 @@ export const LabelPage: FunctionComponent = () => {
     var token = localStorage.getItem("Group Access Token") || "{}";
     const temp = await fetchProject(parseInt(id), token);
     let length = Object.keys(temp).length;
-
+    console.log(temp);
     if (temp.message === "401 Unauthorized") {
       setValidAPI(false);
     } else if (temp.message === "404 Project Not Found") {

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
+// Form hooks for handling the UseForm form in Login-component.
+
 export const useForm = (callback: any, initialState = {}) => {
   const [values, setValues] = useState(initialState);
   const history = useHistory();

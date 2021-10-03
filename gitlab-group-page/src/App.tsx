@@ -19,14 +19,15 @@ function App() {
           value={{ id, setId, name, setName, description, setDescription }}
         >
           <Switch>
-            <Route path="/login">
-              <LogInPage />
-            </Route>
+
             <Route path="/labels">
               <LabelPage />
             </Route>
             <Route path="/issues">
               <IssuePage />
+            </Route>
+            <Route path="/">
+              <LogInPage />
             </Route>
           </Switch>
         </ProjectContext.Provider>

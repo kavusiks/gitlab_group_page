@@ -18,7 +18,7 @@ function LogIn() {
     ) {
       history.push("/labels");
     } else {
-      history.push("/login");
+      history.push("/");
     }
   });
   //const sessionData = DataUser();

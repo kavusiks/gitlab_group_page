@@ -12,8 +12,11 @@ export const useForm = (callback: any, initialState = {}) => {
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     await callback();
-    history.push("/labels");
+    history.push('/labels')
   };
+
+
+
 
   return {
     onChange,

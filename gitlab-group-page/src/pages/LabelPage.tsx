@@ -29,8 +29,6 @@ export const LabelPage: FunctionComponent = () => {
      */
     if (!sessionStorage.getItem("ProjectId")) {
       sessionStorage.setItem("ProjectName", name);
-      console.log("DEN ER: ", description);
-      console.log("name er", name);
       sessionStorage.setItem("ProjectDescription", description);
       sessionStorage.setItem("ProjectId", id.toString());
     }
@@ -45,7 +43,7 @@ export const LabelPage: FunctionComponent = () => {
     ) {
       localStorage.removeItem("Group ID");
       localStorage.removeItem("Group Access Token");
-      history.push("/login");
+      history.push("/");
     } else {
       history.push("/labels");
     }
@@ -56,7 +54,7 @@ export const LabelPage: FunctionComponent = () => {
     var token = localStorage.getItem("Group Access Token") || "{}";
     const temp = await fetchProject(parseInt(id), token);
     let length = Object.keys(temp).length;
-
+    console.log(temp);
     if (temp.message === "401 Unauthorized") {
       setValidAPI(false);
     } else if (temp.message === "404 Project Not Found") {

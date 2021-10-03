@@ -17,16 +17,14 @@ export const InfoView: FunctionComponent<InfoViewProps> = ({
       <Container>
         <Jumbotron>
           <div className="grid-item1">
-            <h1>
-              {name === "" ? sessionStorage.getItem("ProjectName") : name}
-            </h1>
+            <h1>{name === "" ? localStorage.getItem("ProjectName") : name}</h1>
           </div>
           <div className="grid-item2">
-            <h4>#{id === 0 ? sessionStorage.getItem("ProjectId") : id}</h4>
+            <h4>#{id === 0 ? localStorage.getItem("ProjectId") : id}</h4>
           </div>
           <p>
             {description === ""
-              ? sessionStorage.getItem("ProjectDescription")
+              ? localStorage.getItem("ProjectDescription")
               : description}
           </p>
         </Jumbotron>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useForm } from "../../components/FormHook";
 
@@ -21,11 +21,6 @@ function LogIn() {
       history.push("/login");
     }
   });
-  //const sessionData = DataUser();
-
-  //const { setName } = useContext(DataContext);
-
-  //const setDescription = useContext(DataContext);
 
   const { id, setId, name, setName, description, setDescription } =
     useContext(ProjectContext);
@@ -45,19 +40,13 @@ function LogIn() {
     localStorage.setItem("Group ID", Object(values)["groupid"]);
     localStorage.setItem("Group Access Token", Object(values)["grouptoken"]);
 
-    /*const temp = await fetchProject(
-      Object(values)["groupid"],
-      Object(values)["grouptoken"]
-    );
-    //temp kan lagres om en vil- jsonobjekt*/
-    console.log("Før");
-    console.log(id);
-    console.log(name);
-    console.log(description);
     const tempProjectData = await fetchProject(
       Object(values)["groupid"],
       Object(values)["grouptoken"]
     );
+    setId(Object(values)["groupid"]);
+    setName(tempProjectData.name);
+    setDescription(tempProjectData.description);
 
     const tempLabelsData = await fetchLabels(
       Object(values)["groupid"],
@@ -70,19 +59,7 @@ function LogIn() {
     );
     sessionStorage.setItem("Issues", tempIssuesData);
 
-    //temp kan lagres om en vil- jsonobjekt
-    setId(Object(values)["groupid"]);
-    setName(tempProjectData.name);
-    setDescription(tempProjectData.description);
-    console.log("Etter");
-    console.log(
-      initialState.groupid,
-      tempProjectData.name,
-      tempProjectData.description,
-      tempProjectData.id
-    );
-    console.log(tempProjectData.name);
-    sessionStorage.setItem("ProjectDescription", tempProjectData.description);
+    //sessionStorage.setItem("ProjectDescription", tempProjectData.description);
 
     if (tempProjectData.description != null && tempProjectData.name !== null)
       history.push("/labels");

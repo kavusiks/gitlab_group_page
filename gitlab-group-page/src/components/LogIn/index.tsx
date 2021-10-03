@@ -4,7 +4,7 @@ import { useForm } from "../../components/FormHook";
 
 import { ProjectContext } from "../../context/ProjectContext";
 
-import { fetchProject } from "../../core/APIfunction";
+import { fetchIssues, fetchLabels, fetchProject } from "../../core/APIfunction";
 import "./index.css";
 import image from "../../assets/img/teaser-gitlab-cover.png";
 
@@ -54,20 +54,38 @@ function LogIn() {
     console.log(id);
     console.log(name);
     console.log(description);
-    const temp = await fetchProject(
+    const tempProjectData = await fetchProject(
       Object(values)["groupid"],
       Object(values)["grouptoken"]
     );
+
+    const tempLabelsData = await fetchLabels(
+      Object(values)["groupid"],
+      Object(values)["grouptoken"]
+    );
+    sessionStorage.setItem("Labels", tempLabelsData);
+    const tempIssuesData = await fetchIssues(
+      Object(values)["groupid"],
+      Object(values)["grouptoken"]
+    );
+    sessionStorage.setItem("Issues", tempIssuesData);
+
     //temp kan lagres om en vil- jsonobjekt
     setId(Object(values)["groupid"]);
-    setName(temp.name);
-    setDescription(temp.description);
+    setName(tempProjectData.name);
+    setDescription(tempProjectData.description);
     console.log("Etter");
-    console.log(initialState.groupid);
-    console.log(name);
-    console.log(description);
+    console.log(
+      initialState.groupid,
+      tempProjectData.name,
+      tempProjectData.description,
+      tempProjectData.id
+    );
+    console.log(tempProjectData.name);
+    sessionStorage.setItem("ProjectDescription", tempProjectData.description);
 
-    if (temp.description != null && temp.name !== null) history.push("/labels");
+    if (tempProjectData.description != null && tempProjectData.name !== null)
+      history.push("/labels");
   }
 
   return (

@@ -1,34 +1,30 @@
-import { FunctionComponent } from "react";
+import { Component } from "react";
 
-import { Button, ButtonGroup, Container, Navbar } from "react-bootstrap/";
-import { useHistory } from "react-router-dom";
+import { Container, Nav, Navbar } from "react-bootstrap/";
+
 import "./index.css";
 /**
  * Global navbar
  */
-const NavigationBar: FunctionComponent = () => {
-  const history = useHistory();
-
-  function goToIssues() {
-    history.push("/issues");
+/**
+ * Global navbar
+ */
+class NavigationBar extends Component {
+  render() {
+    return (
+      <Navbar bg="dark" variant="dark">
+        <Container>
+          <Navbar.Brand href="/" className="logo">
+            GitLab Group Page
+          </Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="/labels">Labels</Nav.Link>
+            <Nav.Link href="/issues">Issues</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+    );
   }
-
-  function goToLabels() {
-    history.push("/labels");
-  }
-  return (
-    <Navbar bg="dark" variant="dark">
-      <Container>
-        <Navbar.Brand href="/" className="logo">
-          GitLab Group Page
-        </Navbar.Brand>
-        <ButtonGroup>
-          <Button variant="primary" size="lg" onClick={goToIssues}></Button>
-          <Button variant="primary" size="lg" onClick={goToLabels}></Button>
-        </ButtonGroup>
-      </Container>
-    </Navbar>
-  );
-};
+}
 
 export default NavigationBar;

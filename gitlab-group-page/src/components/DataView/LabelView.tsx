@@ -1,18 +1,17 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { fetchLabels } from "../../core/APIfunction";
+
 import Label from "../../models/label";
-import "./index.css"
+import "./index.css";
 
 export interface LabelProps {
   label: Label;
 }
 
-
 export const LabelView: FunctionComponent<LabelProps> = ({
   label,
 }: LabelProps) => {
   let labelcolor = label.color;
- 
+
   const style = {
     h3: {
       fontStyle: "italic",
@@ -23,16 +22,16 @@ export const LabelView: FunctionComponent<LabelProps> = ({
     griditemstyle: {
       borderColor: label.color,
     },
-  } as const
+  } as const;
 
   return (
-        <div className="grid-item" style={style.griditemstyle}>
-          <h1>{label.name}</h1>
-          <h3 style={style.h3}>Color: </h3> 
-          <div className="label-color-box" style={style.labelcolor}>
-            <h3 >{label.color}</h3>
-          </div>
-        </div>
+    <div className="grid-item" style={style.griditemstyle}>
+      <h1>{label.name}</h1>
+      <h3 style={style.h3}>Color: </h3>
+      <div className="label-color-box" style={style.labelcolor}>
+        <h3>{label.color}</h3>
+      </div>
+    </div>
   );
 };
 
@@ -48,15 +47,14 @@ export interface LabelListViewProps {
 
 export const LabelListView: FunctionComponent = () => {
   const [allLabels, setAllLabels] = useState<Label[]>([]);
-  //const { id } = useContext(ProjectContext);
-  const id = localStorage.getItem("Group ID");
-  const token = localStorage.getItem("Group Access Token");
+
+  const labels = sessionStorage.getItem("Labels");
 
   useEffect(() => {
-    if (id != null && token != null) {
-      fetchLabels(parseInt(id), token).then((items) => setAllLabels(items));
+    if (labels != null) {
+      setAllLabels(JSON.parse(labels));
     }
-  }, [id, token]);
+  }, [labels]);
 
   return (
     <div className="grid-container">

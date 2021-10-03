@@ -5,13 +5,14 @@ import React, {
   useState,
 } from "react";
 
-import { Row, Col } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { LabelListView } from "../components/DataView/LabelView";
 import { InfoView } from "../components/InfoView";
 import NavigationBar from "../components/NavigationBar";
 import { ProjectContext } from "../context/ProjectContext";
 import { fetchProject } from "../core/APIfunction";
+import './index.css';
 
 export const LabelPage: FunctionComponent = () => {
   const { id, name, description } = useContext(ProjectContext);
@@ -59,14 +60,13 @@ export const LabelPage: FunctionComponent = () => {
     }
   }
   return (
-    <>
+    <div className="page-wrapper">
       <NavigationBar></NavigationBar>
       <Row>
         <InfoView id={id} name={name} description={description} />
-        <Col md={2}></Col>
         <LabelListView />
       </Row>
-    </>
+    </div>
   );
 };
 

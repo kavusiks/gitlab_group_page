@@ -1,6 +1,5 @@
 import { FunctionComponent } from "react";
 import { Container, Jumbotron } from "react-bootstrap";
-import "./index.css";
 
 export interface InfoViewProps {
   id: number;

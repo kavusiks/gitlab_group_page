@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useContext } from "react";
 
-import { Row, Col } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import { IssueListView } from "../components/DataView/IssuesView";
 import { InfoView } from "../components/InfoView";
 import NavigationBar from "../components/NavigationBar";
@@ -13,14 +13,13 @@ export const IssuePage: FunctionComponent = () => {
   console.log("sjekka det nå");
 
   return (
-    <>
+    <div className="page-wrapper">
       <NavigationBar></NavigationBar>
       <Row>
         <InfoView id={id} name={name} description={description} />
-        <Col md={2}></Col>
         <IssueListView />
       </Row>
-    </>
+    </div>
   );
 };
 

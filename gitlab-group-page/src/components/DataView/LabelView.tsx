@@ -3,10 +3,18 @@ import { FunctionComponent, useEffect, useState } from "react";
 import Label from "../../models/label";
 import "./index.css";
 
+/**
+ * Props to pass LabelView component
+ */
 export interface LabelProps {
   label: Label;
 }
 
+/**
+ *
+ * @param param0 the label to show
+ * @returns a view of the label
+ */
 export const LabelView: FunctionComponent<LabelProps> = ({
   label,
 }: LabelProps) => {
@@ -45,6 +53,10 @@ export interface LabelListViewProps {
   labels: Label[];
 }
 
+/**
+ *
+ * @returns Component showing several labels
+ */
 export const LabelListView: FunctionComponent = () => {
   const [allLabels, setAllLabels] = useState<Label[]>([]);
 

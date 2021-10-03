@@ -34,6 +34,12 @@ export const LabelPage: FunctionComponent = () => {
       localStorage.setItem("ProjectDescription", description);
   });
 
+  /**
+   * Method for switching routes. 
+   * Checks if it is anything in localStorage and checks if the API is still valid.
+   * If the token is expired the user will be redirected back to the login page. 
+   * This will be run on load. 
+   */
   const switchRoutes = () => {
     isValidAPI();
     if (
@@ -49,6 +55,10 @@ export const LabelPage: FunctionComponent = () => {
     }
   };
 
+  /**
+   * Function to check if the token saved in localstorage is valid. 
+   * Based on the returned message the validAPI will be set.
+   */
   async function isValidAPI() {
     var id = localStorage.getItem("Group ID") || "{}";
     var token = localStorage.getItem("Group Access Token") || "{}";
@@ -66,6 +76,7 @@ export const LabelPage: FunctionComponent = () => {
       console.log("Something is wrong");
     }
   }
+  
   return (
     <div className="page-wrapper">
       <NavigationBar></NavigationBar>

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm } from "../FormHook";
-import { fetchProject } from "../../core/APIfunction";
+//import { fetchProject } from "../../core/APIfunction";
 import "./index.css";
 import image from '../../assets/img/teaser-gitlab-cover.png';
 import { useHistory } from "react-router-dom";

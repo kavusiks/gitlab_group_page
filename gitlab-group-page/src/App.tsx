@@ -7,6 +7,8 @@ import LabelPage from "./pages/LabelPage";
 import { ProjectContext } from "./context/ProjectContext";
 import IssuePage from "./pages/IssuePage";
 
+// App Component, which is a container for all the other components.
+
 function App() {
   const [id, setId] = useState<number>(0);
   const [name, setName] = useState<string>("");

@@ -23,7 +23,8 @@ export const fetchLabels = async (id: number, token: string) => {
       },
     })
   ).json();
-  return JSON.stringify(response);
+  return response;
+  //return JSON.stringify(response);
 };
 
 export const fetchCommits = async (id: number, token: string) => {

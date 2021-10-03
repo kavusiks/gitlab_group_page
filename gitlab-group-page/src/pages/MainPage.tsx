@@ -7,6 +7,7 @@ import React, {
 
 import { Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router";
+import { LabelListView } from "../components/DataView/LabelView";
 import { InfoView } from "../components/InfoView";
 import NavigationBar from "../components/NavigationBar";
 import { ProjectContext } from "../context/ProjectContext";
@@ -14,6 +15,9 @@ import { fetchProject } from "../core/APIfunction";
 
 export const MainPage: FunctionComponent = () => {
   const { id, name, description } = useContext(ProjectContext);
+  console.log(localStorage.getItem("id"));
+  console.log(localStorage.getItem("token"));
+  console.log("sjekka det nå");
 
   const history = useHistory();
   const [validAPI, setValidAPI] = useState(true);
@@ -60,6 +64,7 @@ export const MainPage: FunctionComponent = () => {
       <Row>
         <InfoView id={id} name={name} description={description} />
         <Col md={2}></Col>
+        <LabelListView />
       </Row>
     </>
   );

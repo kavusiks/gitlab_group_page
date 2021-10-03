@@ -59,7 +59,6 @@ function LogIn() {
       Object(values)["grouptoken"]
     );
     //temp kan lagres om en vil- jsonobjekt
-
     setId(Object(values)["groupid"]);
     setName(temp.name);
     setDescription(temp.description);

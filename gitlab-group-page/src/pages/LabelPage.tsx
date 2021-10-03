@@ -13,7 +13,7 @@ import NavigationBar from "../components/NavigationBar";
 import { ProjectContext } from "../context/ProjectContext";
 import { fetchProject } from "../core/APIfunction";
 
-export const MainPage: FunctionComponent = () => {
+export const LabelPage: FunctionComponent = () => {
   const { id, name, description } = useContext(ProjectContext);
   console.log(localStorage.getItem("id"));
   console.log(localStorage.getItem("token"));
@@ -70,4 +70,4 @@ export const MainPage: FunctionComponent = () => {
   );
 };
 
-export default MainPage;
+export default LabelPage;

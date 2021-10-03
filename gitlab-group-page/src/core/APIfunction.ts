@@ -52,7 +52,8 @@ export const fetchIssues = async (id: number, token: string) => {
       },
     })
   ).json();
-  return JSON.stringify(response);
+  return response;
+  //return JSON.stringify(response);
 };
 
 export const fetchHistory = async (id: number, token: string) => {

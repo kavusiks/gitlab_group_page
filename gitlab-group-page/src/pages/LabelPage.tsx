@@ -12,7 +12,7 @@ import { InfoView } from "../components/InfoView";
 import NavigationBar from "../components/NavigationBar";
 import { ProjectContext } from "../context/ProjectContext";
 import { fetchProject } from "../core/APIfunction";
-import './index.css';
+import "./index.css";
 
 export const LabelPage: FunctionComponent = () => {
   const { id, name, description } = useContext(ProjectContext);
@@ -24,16 +24,22 @@ export const LabelPage: FunctionComponent = () => {
     switchRoutes();
     /**
      * Saving data from project context to sessionStorage, in case user
-     * refreshes the page which will reset data in context. It will only be saved if it
-     * is not in sessionStorage in advance
+     * refreshes the page which will reset data in context. It will only be saved if the
+     * values are not default values.
      */
-    if (!sessionStorage.getItem("ProjectId")) {
-      sessionStorage.setItem("ProjectName", name);
-      sessionStorage.setItem("ProjectDescription", description);
-      sessionStorage.setItem("ProjectId", id.toString());
-    }
+    if (id !== 0) localStorage.setItem("ProjectId", id.toString());
+
+    if (name !== "") localStorage.setItem("ProjectName", name);
+    if (description !== "")
+      localStorage.setItem("ProjectDescription", description);
   });
 
+  /**
+   * Method for switching routes. 
+   * Checks if it is anything in localStorage and checks if the API is still valid.
+   * If the token is expired the user will be redirected back to the login page. 
+   * This will be run on load. 
+   */
   const switchRoutes = () => {
     isValidAPI();
     if (
@@ -49,6 +55,10 @@ export const LabelPage: FunctionComponent = () => {
     }
   };
 
+  /**
+   * Function to check if the token saved in localstorage is valid. 
+   * Based on the returned message the validAPI will be set.
+   */
   async function isValidAPI() {
     var id = localStorage.getItem("Group ID") || "{}";
     var token = localStorage.getItem("Group Access Token") || "{}";
@@ -66,6 +76,7 @@ export const LabelPage: FunctionComponent = () => {
       console.log("Something is wrong");
     }
   }
+  
   return (
     <div className="page-wrapper">
       <NavigationBar></NavigationBar>

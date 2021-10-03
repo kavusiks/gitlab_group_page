@@ -4,10 +4,18 @@ import Issue from "../../models/issue";
 import "./index.css";
 import image from "../../assets/img/logo-extra-whitespace.png";
 
+/**
+ * Props to pass IssueView component
+ */
 export interface IssueProps {
   issue: Issue;
 }
 
+/**
+ *
+ * @param param0 the issue to show
+ * @returns a view of the issue
+ */
 export const IssueView: FunctionComponent<IssueProps> = ({
   issue,
 }: IssueProps) => {
@@ -42,6 +50,10 @@ export interface IssueListViewProps {
   issues: Issue[];
 }
 
+/**
+ *
+ * @returns Component showing several issues
+ */
 export const IssueListView: FunctionComponent = () => {
   const [allIssues, setAllIssues] = useState<Issue[]>([]);
 

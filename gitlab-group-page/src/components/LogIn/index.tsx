@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useForm } from "../../components/FormHook";
 
@@ -11,6 +11,10 @@ import image from "../../assets/img/teaser-gitlab-cover.png";
 function LogIn() {
   const history = useHistory();
 
+  /**
+   * On load it will check if something is saved in localstorage, if so 
+   * the user will be sent to the page with the labels. 
+   */
   useEffect(() => {
     if (
       !(localStorage.getItem("Group ID") === null) &&
@@ -21,14 +25,8 @@ function LogIn() {
       history.push("/");
     }
   });
-  //const sessionData = DataUser();
 
-  //const { setName } = useContext(DataContext);
-
-  //const setDescription = useContext(DataContext);
-
-  const { id, setId, name, setName, description, setDescription } =
-    useContext(ProjectContext);
+  const { setId, setName, setDescription } = useContext(ProjectContext);
 
   const initialState = {
     groupid: 0,
@@ -41,23 +39,23 @@ function LogIn() {
     initialState
   );
 
+  /**
+   * Method that sets the localstorage based on information that is written by the user. 
+   * After this it will do an API call with provided information. 
+   * It will do three API calls. 
+   * For each time it will also set some information in the sessionStorage. 
+   *  */ 
   async function loginUserCallBack() {
     localStorage.setItem("Group ID", Object(values)["groupid"]);
     localStorage.setItem("Group Access Token", Object(values)["grouptoken"]);
 
-    /*const temp = await fetchProject(
-      Object(values)["groupid"],
-      Object(values)["grouptoken"]
-    );
-    //temp kan lagres om en vil- jsonobjekt*/
-    console.log("Før");
-    console.log(id);
-    console.log(name);
-    console.log(description);
     const tempProjectData = await fetchProject(
       Object(values)["groupid"],
       Object(values)["grouptoken"]
     );
+    setId(Object(values)["groupid"]);
+    setName(tempProjectData.name);
+    setDescription(tempProjectData.description);
 
     const tempLabelsData = await fetchLabels(
       Object(values)["groupid"],
@@ -70,19 +68,7 @@ function LogIn() {
     );
     sessionStorage.setItem("Issues", tempIssuesData);
 
-    //temp kan lagres om en vil- jsonobjekt
-    setId(Object(values)["groupid"]);
-    setName(tempProjectData.name);
-    setDescription(tempProjectData.description);
-    console.log("Etter");
-    console.log(
-      initialState.groupid,
-      tempProjectData.name,
-      tempProjectData.description,
-      tempProjectData.id
-    );
-    console.log(tempProjectData.name);
-    sessionStorage.setItem("ProjectDescription", tempProjectData.description);
+    //sessionStorage.setItem("ProjectDescription", tempProjectData.description);
 
     if (tempProjectData.description != null && tempProjectData.name !== null)
       history.push("/labels");

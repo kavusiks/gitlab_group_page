@@ -1,29 +1,39 @@
-import React, { useEffect } from "react";
-import { useForm } from "../FormHook";
-//import { fetchProject } from "../../core/APIfunction";
-import "./index.css";
-import image from '../../assets/img/teaser-gitlab-cover.png';
+import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { useForm } from "../../components/FormHook";
+
+import { ProjectContext } from "../../context/ProjectContext";
+
+import { fetchProject } from "../../core/APIfunction";
+import "./index.css";
+import image from "../../assets/img/teaser-gitlab-cover.png";
 
 function LogIn() {
-
   const history = useHistory();
 
   useEffect(() => {
-
-    if (!(localStorage.getItem("Group ID")===null) && !(localStorage.getItem("Group Access Token")===null) ) {
-      history.push('/main-page');
+    if (
+      !(localStorage.getItem("Group ID") === null) &&
+      !(localStorage.getItem("Group Access Token") === null)
+    ) {
+      history.push("/labels");
     } else {
-      history.push('/');
+      history.push("/login");
     }
   });
+  //const sessionData = DataUser();
+
+  //const { setName } = useContext(DataContext);
+
+  //const setDescription = useContext(DataContext);
+
+  const { id, setId, name, setName, description, setDescription } =
+    useContext(ProjectContext);
+
   const initialState = {
     groupid: 0,
     grouptoken: "",
   };
-
-
-  
 
   // eslint-disable-next-line
   const { onChange, onSubmit, values } = useForm(
@@ -40,6 +50,24 @@ function LogIn() {
       Object(values)["grouptoken"]
     );
     //temp kan lagres om en vil- jsonobjekt*/
+    console.log("Før");
+    console.log(id);
+    console.log(name);
+    console.log(description);
+    const temp = await fetchProject(
+      Object(values)["groupid"],
+      Object(values)["grouptoken"]
+    );
+    //temp kan lagres om en vil- jsonobjekt
+    setId(Object(values)["groupid"]);
+    setName(temp.name);
+    setDescription(temp.description);
+    console.log("Etter");
+    console.log(initialState.groupid);
+    console.log(name);
+    console.log(description);
+
+    if (temp.description != null && temp.name !== null) history.push("/labels");
   }
 
   return (
@@ -49,7 +77,13 @@ function LogIn() {
         <div className="container">
           <div className="row">
             <div className="col img-col">
-              <img src={image} alt="Gitlab logo" width="40vh" height="20vh" className="login-image"/>
+              <img
+                src={image}
+                alt="Gitlab logo"
+                width="40vh"
+                height="20vh"
+                className="login-image"
+              />
             </div>
             <div className="col form-col">
               <form onSubmit={onSubmit}>
@@ -80,34 +114,30 @@ function LogIn() {
                           Group Access Token
                         </label>
                       </div>
-                <div className="col-right">
-                  <input
-                    name="grouptoken"
-                    id="grouptoken"
-                    type="text"
-                    placeholder="Ex: xxGWKwsM1A6MHobbwDey"
-                    onChange={onChange}
-                    required
-                  />
+                      <div className="col-right">
+                        <input
+                          name="grouptoken"
+                          id="grouptoken"
+                          type="text"
+                          placeholder="Ex: xxGWKwsM1A6MHobbwDey"
+                          onChange={onChange}
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div className="form-row">
+                      <button type="submit" className="login-btn">
+                        Log In
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="form-row">
-                <button
-                type="submit" 
-                className="login-btn" 
-                >
-                  Log In
-                </button>
-              </div>
-            </div>
-          </div>
-          </form>
+              </form>
             </div>
           </div>
         </div>
       </div>
     </div>
-      
   );
 }
 

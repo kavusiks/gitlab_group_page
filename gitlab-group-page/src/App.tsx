@@ -9,12 +9,13 @@ function App() {
     <div>
       <BrowserRouter>
         <Switch>
-          <Route path="/login">
-            <LogInPage />
-          </Route>
-          <Route path="/">
+          <Route path="/main-page">
             <MainPage />
           </Route>
+          <Route path="/">
+            <LogInPage />
+          </Route>
+          
         </Switch>
       </BrowserRouter>
     </div>

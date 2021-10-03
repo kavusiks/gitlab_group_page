@@ -1,14 +1,6 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 
-import {
-  Button,
-  ButtonGroup,
-  Container,
-  Nav,
-  Navbar,
-  ToggleButton,
-  ToggleButtonGroup,
-} from "react-bootstrap/";
+import { Button, ButtonGroup, Container, Navbar } from "react-bootstrap/";
 import { useHistory } from "react-router-dom";
 import "./index.css";
 /**
@@ -16,8 +8,6 @@ import "./index.css";
  */
 const NavigationBar: FunctionComponent = () => {
   const history = useHistory();
-  const handleChange = (val: string) => history.push(val);
-  const [value, setValue] = useState("");
 
   function goToIssues() {
     history.push("/issues");

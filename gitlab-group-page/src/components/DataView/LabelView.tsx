@@ -1,7 +1,6 @@
-import { FunctionComponent, useContext, useEffect, useState } from "react";
-import { Badge, Container, Jumbotron } from "react-bootstrap";
-import { ProjectContext } from "../../context/ProjectContext";
-import { fetchLabels, fetchProject } from "../../core/APIfunction";
+import { FunctionComponent, useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
+import { fetchLabels } from "../../core/APIfunction";
 import Label from "../../models/label";
 
 export interface LabelProps {
@@ -36,18 +35,15 @@ export interface LabelListViewProps {
   labels: Label[];
 }
 
-export const LabelListView: FunctionComponent = ({}) => {
+export const LabelListView: FunctionComponent = () => {
   const [allLabels, setAllLabels] = useState<Label[]>([]);
   //const { id } = useContext(ProjectContext);
-  const id = localStorage.getItem("id");
-  const token = localStorage.getItem("token");
+  const id = localStorage.getItem("Group ID");
+  const token = localStorage.getItem("Group Access Token");
 
   useEffect(() => {
     if (id != null && token != null) {
       fetchLabels(parseInt(id), token).then((items) => setAllLabels(items));
-      //console.log(fetchLabels(parseInt(id), token));
-      //console.log(fetchProject(parseInt(id), token));
-      console.log("apikall");
     }
   }, [id, token]);
 

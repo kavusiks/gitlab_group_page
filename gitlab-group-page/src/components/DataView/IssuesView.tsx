@@ -1,9 +1,8 @@
-import { Component, FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 
-import { Container, Nav, Navbar } from "react-bootstrap/";
-import { fetchIssues, fetchLabels } from "../../core/APIfunction";
+import { Container } from "react-bootstrap/";
+import { fetchIssues } from "../../core/APIfunction";
 import Issue from "../../models/issue";
-import NavigationBar from "../NavigationBar";
 
 export interface IssueProps {
   issue: Issue;
@@ -34,17 +33,15 @@ export interface IssueListViewProps {
   issues: Issue[];
 }
 
-export const IssueListView: FunctionComponent = ({}) => {
+export const IssueListView: FunctionComponent = () => {
   const [allIssues, setAllIssues] = useState<Issue[]>([]);
-  //const { id } = useContext(ProjectContext);
-  const id = localStorage.getItem("id");
-  const token = localStorage.getItem("token");
+
+  const id = localStorage.getItem("Group ID");
+  const token = localStorage.getItem("Group Access Token");
 
   useEffect(() => {
     if (id != null && token != null) {
       fetchIssues(parseInt(id), token).then((items) => setAllIssues(items));
-      //console.log(fetchLabels(parseInt(id), token));
-      //console.log(fetchProject(parseInt(id), token));
     }
   }, [id, token]);
 

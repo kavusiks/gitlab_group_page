@@ -9,7 +9,7 @@ import IssuePage from "./pages/IssuePage";
 
 function App() {
   const [id, setId] = useState<number>(0);
-  const [name, setName] = useState<string>("g");
+  const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
 
   return (

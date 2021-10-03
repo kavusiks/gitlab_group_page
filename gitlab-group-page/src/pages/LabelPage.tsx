@@ -15,15 +15,24 @@ import { fetchProject } from "../core/APIfunction";
 
 export const LabelPage: FunctionComponent = () => {
   const { id, name, description } = useContext(ProjectContext);
-  console.log(localStorage.getItem("id"));
-  console.log(localStorage.getItem("token"));
-  console.log("sjekka det nå");
 
   const history = useHistory();
   const [validAPI, setValidAPI] = useState(true);
 
   useEffect(() => {
     switchRoutes();
+    /**
+     * Saving data from project context to sessionStorage, in case user
+     * refreshes the page which will reset data in context. It will only be saved if it
+     * is not in sessionStorage in advance
+     */
+    if (!sessionStorage.getItem("ProjectId")) {
+      sessionStorage.setItem("ProjectName", name);
+      console.log("DEN ER: ", description);
+      console.log("name er", name);
+      sessionStorage.setItem("ProjectDescription", description);
+      sessionStorage.setItem("ProjectId", id.toString());
+    }
   });
 
   const switchRoutes = () => {

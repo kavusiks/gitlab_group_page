@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect, useState } from "react";
 
 import { Container } from "react-bootstrap/";
-import { fetchIssues } from "../../core/APIfunction";
+
 import Issue from "../../models/issue";
 
 export interface IssueProps {
@@ -36,14 +36,13 @@ export interface IssueListViewProps {
 export const IssueListView: FunctionComponent = () => {
   const [allIssues, setAllIssues] = useState<Issue[]>([]);
 
-  const id = localStorage.getItem("Group ID");
-  const token = localStorage.getItem("Group Access Token");
+  const issues = sessionStorage.getItem("Issues");
 
   useEffect(() => {
-    if (id != null && token != null) {
-      fetchIssues(parseInt(id), token).then((items) => setAllIssues(items));
+    if (issues != null) {
+      setAllIssues(JSON.parse(issues));
     }
-  }, [id, token]);
+  }, [issues]);
 
   return (
     <div>

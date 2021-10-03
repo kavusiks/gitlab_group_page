@@ -1,6 +1,6 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import { fetchLabels } from "../../core/APIfunction";
+
 import Label from "../../models/label";
 
 export interface LabelProps {
@@ -37,15 +37,14 @@ export interface LabelListViewProps {
 
 export const LabelListView: FunctionComponent = () => {
   const [allLabels, setAllLabels] = useState<Label[]>([]);
-  //const { id } = useContext(ProjectContext);
-  const id = localStorage.getItem("Group ID");
-  const token = localStorage.getItem("Group Access Token");
+
+  const labels = sessionStorage.getItem("Labels");
 
   useEffect(() => {
-    if (id != null && token != null) {
-      fetchLabels(parseInt(id), token).then((items) => setAllLabels(items));
+    if (labels != null) {
+      setAllLabels(JSON.parse(labels));
     }
-  }, [id, token]);
+  }, [labels]);
 
   return (
     <div>

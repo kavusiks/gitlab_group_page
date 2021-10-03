@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import LogInPage from "./pages/LogInPage";
@@ -13,6 +13,7 @@ function App() {
   const [id, setId] = useState<number>(0);
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+  const history = useHistory();
 
   return (
     <div>

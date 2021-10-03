@@ -36,7 +36,20 @@ Vi har valgt å implementere applikasjonen i React med TypeScript i henhold til 
 
 React-applikasjonen har rot i `/gitlab-group-page/gitlab-group-page` og her blir applikasjonen bygget. I rotmappen til repoet `/gitlab-group-page/` ligger konfigurasjonsfiler for gitlab.
 
-## Valg av løsninger
+
+    src
+    ├─────── assets
+    ├─────── components
+    |        ├── DataView
+    |        ├── Formhook
+    |        ├── InfoView
+    |        ├── LogIn
+    |        └── NavigationBar
+    ├─────── context
+    ├─────── core
+    ├─────── models
+    └─────── pages
+
 
 ### Komponentvalg
 

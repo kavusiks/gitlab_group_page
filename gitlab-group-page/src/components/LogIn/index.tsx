@@ -10,6 +10,7 @@ function LogIn() {
   const history = useHistory();
 
   useEffect(() => {
+
     if (!(localStorage.getItem("Group ID")===null) && !(localStorage.getItem("Group Access Token")===null) ) {
       history.push('/main-page');
     } else {
@@ -39,7 +40,6 @@ function LogIn() {
       Object(values)["grouptoken"]
     );
     //temp kan lagres om en vil- jsonobjekt
-    console.log(temp.message);
   }
 
   return (
@@ -48,7 +48,7 @@ function LogIn() {
       <div className="wrapper">
         <div className="container">
           <div className="row">
-            <div className="col">
+            <div className="col img-col">
               <img src={image} alt="Gitlab logo" width="40vh" height="20vh" className="login-image"/>
             </div>
             <div className="col form-col">

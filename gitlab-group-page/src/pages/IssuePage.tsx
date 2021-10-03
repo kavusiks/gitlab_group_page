@@ -5,7 +5,7 @@ import React, {
   useState,
 } from "react";
 
-import { Row, Col } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { IssueListView } from "../components/DataView/IssuesView";
 import { InfoView } from "../components/InfoView";
@@ -33,7 +33,7 @@ export const IssuePage: FunctionComponent = () => {
       localStorage.removeItem("Group Access Token");
       history.push("/login");
     } else {
-      history.push("/labels");
+      history.push("/issues");
     }
   };
 

@@ -1,6 +1,4 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { fetchLabels } from "../../core/APIfunction";
-import { Container } from "react-bootstrap";
 
 import Label from "../../models/label";
 import "./index.css";

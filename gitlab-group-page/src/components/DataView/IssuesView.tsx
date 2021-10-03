@@ -1,8 +1,5 @@
 import { FunctionComponent, useEffect, useState } from "react";
 
-import { fetchIssues } from "../../core/APIfunction";
-import { Container } from "react-bootstrap/";
-
 import Issue from "../../models/issue";
 import "./index.css";
 import image from "../../assets/img/logo-extra-whitespace.png";

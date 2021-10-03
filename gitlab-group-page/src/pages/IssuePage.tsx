@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useContext } from "react";
 
-import { Row, Col } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import { IssueListView } from "../components/DataView/IssuesView";
 import { InfoView } from "../components/InfoView";
 import NavigationBar from "../components/NavigationBar";

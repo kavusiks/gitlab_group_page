@@ -62,6 +62,11 @@ Vi har benyttet oss av både localStorage og sessionStorage. Førstnevnte har in
 
 ### Stylingvalg (CSS)
 
+På LogIn siden har vi valgt å følge fargekombinasjonen som forbindes med GitLab. Dette for å gjøre at brukeren kan assosiere med siden allerede fra første stund. For å holde et moderne men ryddig uttrykk har vi hatt ett bilde ved siden av selve innlogginsskjemaet. Dette skjemaet følger nevnt fargekombinasjon. I denne delen av oppgaven har vi også passet på å bruke teknologier for å få Responsiv Design.
+
+Når det kommer til hovedsidene som viser labels og issues. Navbaren er en UI-komponent fra bootstrap. 
+På issues-siden vil man kunne se fargekombinasjonen til GitLab. På labels siden er fargene unike, ettersom hver eneste label vi har brukt har en unik fargekode. Det har blitt brukt CSS-grid for responsiv design i samarbeid med Viewport. 
+
 ### Responsive design
 
 Vi har et responsiv design på appen vår. Siden skalerer seg etter skjermstørrelser og enhetstyper. Dette kan ses tydelig på login sida. CSS flexbox, CSS grid, Media-queris og viewport har sammen bidratt til at vi har fått til en responsiv design på appen vår. Elementene plasseres der vi ønsker at de skal være, uavhengig av skjermstørrelse og enhet. De strekkes og krympes automatisk som gir responsiv resultat for brukeren.

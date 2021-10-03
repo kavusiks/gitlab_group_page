@@ -13,14 +13,13 @@ export const IssuePage: FunctionComponent = () => {
   console.log("sjekka det nå");
 
   return (
-    <>
+    <div className="page-wrapper">
       <NavigationBar></NavigationBar>
       <Row>
         <InfoView id={id} name={name} description={description} />
-        <Col md={2}></Col>
         <IssueListView />
       </Row>
-    </>
+    </div>
   );
 };
 

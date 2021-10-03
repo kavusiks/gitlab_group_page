@@ -5,7 +5,7 @@ import React, {
   useState,
 } from "react";
 
-import { Row, Col } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { LabelListView } from "../components/DataView/LabelView";
 import { InfoView } from "../components/InfoView";

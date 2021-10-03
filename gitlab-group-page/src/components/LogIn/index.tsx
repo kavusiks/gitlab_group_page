@@ -22,12 +22,11 @@ function LogIn() {
     ) {
       history.push("/labels");
     } else {
-      history.push("/login");
+      history.push("/");
     }
   });
 
-  const { id, setId, name, setName, description, setDescription } =
-    useContext(ProjectContext);
+  const { setId, setName, setDescription } = useContext(ProjectContext);
 
   const initialState = {
     groupid: 0,

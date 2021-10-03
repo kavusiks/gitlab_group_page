@@ -10,11 +10,11 @@ const NavigationBar: FunctionComponent = () => {
   const history = useHistory();
 
   function goToIssues() {
-    history.push("/issues");
+    history.push("/issues-page");
   }
 
   function goToLabels() {
-    history.push("/labels");
+    history.push("/labels-page");
   }
   return (
     <Navbar bg="dark" variant="dark">

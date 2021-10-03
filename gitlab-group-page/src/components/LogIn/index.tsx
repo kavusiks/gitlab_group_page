@@ -35,11 +35,11 @@ function LogIn() {
     localStorage.setItem("Group ID", Object(values)["groupid"]);
     localStorage.setItem("Group Access Token", Object(values)["grouptoken"]);
 
-    const temp = await fetchProject(
+    /*const temp = await fetchProject(
       Object(values)["groupid"],
       Object(values)["grouptoken"]
     );
-    //temp kan lagres om en vil- jsonobjekt
+    //temp kan lagres om en vil- jsonobjekt*/
   }
 
   return (

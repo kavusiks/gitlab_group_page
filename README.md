@@ -4,7 +4,7 @@ Dette er et prosjekt i IT2810 der det er laget en SPA for å vise fram diverse i
 
 ## Om applikasjonen
 
-Applikasjon er webapplikasjon implementert med React-komponenter i TypeScript. Brukeren logger inn ved å oppgi Group ID av et prosjekt brukeren vil ha innsyn i. Brukeren må også oppgi en "Auth"-token generert enten med tilknytning til gitlab-brukeren eller prosjektet. I webapplikasjonen kan man se blant annet alle labels på issues og alle commits gjort. Denne informasjonen blir hentet med API-kall og lagret i &&&&&&&&&&&
+Applikasjon er webapplikasjon implementert med React-komponenter i TypeScript. Brukeren logger inn ved å oppgi Group ID av et prosjekt brukeren vil ha innsyn i. Brukeren må også oppgi en "Auth"-token generert enten med tilknytning til gitlab-brukeren eller prosjektet. I webapplikasjonen kan man se blant annet alle labels på issues og alle issues. Denne informasjonen blir hentet med API-kall og lagret i sessionStorage. Dataene oppdateres med API-kallene hver gang man åpner siden i en ny tab.
 
 ### Hvordan kjøre applikasjonen
 

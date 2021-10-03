@@ -1,13 +1,20 @@
 stages: 
   - test
   - build
-  # - deploy
+  - deploy
+
+cache:
+  paths: 
+    - /node_modules/
+
+before_script:
+  - rm -rf build
+  - CI=false yarn install
 
 test project: 
   stage: test
   image: node:14
   script:
-    - cd gitlab-group-page
     - yarn install
     - yarn test -- --coverage --updateSnapshot
 
@@ -15,14 +22,18 @@ build project:
   stage: build
   image: node:14
   script:
-    - cd gitlab-group-page
     - yarn install
     - yarn build
 
-# deploy
-# stage: deploy
-# image: node:14
-# script:
-#
-#
-#
+
+pages:
+  stage: deploy
+  image: node:14
+  script:
+    - CI=false yarn run build
+    - rm -rf public
+    - cp build/index.html build/404.html
+    - mv build public
+  artifacts:
+    paths:
+      - public

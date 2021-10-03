@@ -1,6 +1,6 @@
 import React from 'react';
 import App from "./App";
-const TestRenderer = require('react-test-renderer');
+import TestRenderer from 'react-test-renderer';
 
 
 it('renders correctly', () => {

@@ -1,8 +1,9 @@
 import { FunctionComponent, useEffect, useState } from "react";
 
-import { Container } from "react-bootstrap/";
 import { fetchIssues } from "../../core/APIfunction";
 import Issue from "../../models/issue";
+import './index.css';
+import image from "../../assets/img/logo-extra-whitespace.png";
 
 export interface IssueProps {
   issue: Issue;
@@ -12,17 +13,27 @@ export const IssueView: FunctionComponent<IssueProps> = ({
   issue,
 }: IssueProps) => {
   return (
-    <div>
-      <Container>
-        <div className="grid-item1">
-          <h1>{issue.title}</h1>
+      <div className="grid-item issue-grid-item">
+        <div className="grid-item-header">
+          <img
+            src={image}
+            alt="Gitlab logo"
+            width='30%'
+            height='30%'
+            className="issues-image"
+          />
         </div>
-        <h3>
-          Number:
-          {" " + issue.iid}
-        </h3>
-      </Container>
-    </div>
+        <div className="grid-item-title">
+          <h1>{issue.title}</h1>  
+        </div>
+        <div className="grid-item-content">
+          <h3>
+            Number:
+            {" #" + issue.iid}
+          </h3>
+        </div>
+          
+      </div>
   );
 };
 
@@ -46,7 +57,7 @@ export const IssueListView: FunctionComponent = () => {
   }, [id, token]);
 
   return (
-    <div>
+    <div className="grid-container issue-grid-container">
       {allIssues.map((item) => {
         return <IssueView issue={item} />;
       })}

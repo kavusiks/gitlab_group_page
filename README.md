@@ -64,6 +64,8 @@ Vi har benyttet oss av både localStorage og sessionStorage. Førstnevnte har in
 
 ### Responsive design
 
+Vi har et responsiv design på appen vår. Siden skalerer seg etter skjermstørrelser og enhetstyper. Dette kan ses tydelig på login sida. CSS flexbox, CSS grid, Media-queris og viewport har sammen bidratt til at vi har fått til en responsiv design på appen vår. Elementene plasseres der vi ønsker at de skal være, uavhengig av skjermstørrelse og enhet. De strekkes og krympes automatisk som gir responsiv resultat for brukeren.
+
 ### Testing
 
 Vi har snapshot-tester av noen av komponentene. I tillegg testes noen av elementene og funksjonaliteten i LogIn-komponenten. Testene er konfigurert med jest og utført med jest-rammeverket. Vi har også brukt Enzyme-adapter for å enkelt rendre komponentene som skal testes med jest. Enzyme er en utrolig lettvint måte å hente ut enkelt rendrede komponenter uten å adaptere lifecycle-funksjonaliteten og state forøvrig. Dette er noe vi ikke tester ettersom det ikke er i kravene. Jest kommer allerede konfigurert med standard React-oppsett, og det gjør Jest til et naturlig valg innen testing.

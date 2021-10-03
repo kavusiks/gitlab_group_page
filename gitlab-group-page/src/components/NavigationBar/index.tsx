@@ -6,6 +6,7 @@ import "./index.css";
 /**
  * Global navbar
  */
+<<<<<<< HEAD
 /**
  * Global navbar
  */
@@ -24,6 +25,17 @@ class NavigationBar extends Component {
         </Container>
       </Navbar>
     );
+=======
+const NavigationBar: FunctionComponent = () => {
+  const history = useHistory();
+
+  function goToIssues() {
+    history.push("/issues-page");
+  }
+
+  function goToLabels() {
+    history.push("/labels-page");
+>>>>>>> 11972ce (Updated routs)
   }
 }
 

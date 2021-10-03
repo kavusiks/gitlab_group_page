@@ -45,9 +45,9 @@ export const LabelPage: FunctionComponent = () => {
     ) {
       localStorage.removeItem("Group ID");
       localStorage.removeItem("Group Access Token");
-      history.push("/login");
+      history.push("/");
     } else {
-      history.push("/labels");
+      history.push("/labels-page");
     }
   };
 

@@ -19,13 +19,13 @@ function App() {
           value={{ id, setId, name, setName, description, setDescription }}
         >
           <Switch>
-            <Route path="/login">
+            <Route path="/">
               <LogInPage />
             </Route>
-            <Route path="/labels">
+            <Route path="/labels-page">
               <LabelPage />
             </Route>
-            <Route path="/issues">
+            <Route path="/issues-page">
               <IssuePage />
             </Route>
           </Switch>

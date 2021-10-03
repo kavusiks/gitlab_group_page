@@ -5,8 +5,7 @@ import React, {
   useState,
 } from "react";
 
-import { Row } from "react-bootstrap";
-
+import { Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { IssueListView } from "../components/DataView/IssuesView";
 import { InfoView } from "../components/InfoView";

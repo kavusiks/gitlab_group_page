@@ -1,45 +1,60 @@
-import { FunctionComponent, useEffect, useState } from "react";
-import { Container, Jumbotron } from "react-bootstrap";
-import { fetchLabels } from "../../core/APIfunction";
+import { FunctionComponent, useContext, useEffect, useState } from "react";
+import { Badge, Container, Jumbotron } from "react-bootstrap";
+import { ProjectContext } from "../../context/ProjectContext";
+import { fetchLabels, fetchProject } from "../../core/APIfunction";
+import Label from "../../models/label";
 
 export interface LabelProps {
-  name: string;
-  setName: (name: string) => void;
-  color: string;
-  setColor: (color: string) => void;
+  label: Label;
 }
-/*
 
 export const LabelView: FunctionComponent<LabelProps> = ({
-  name,
-  setName,
-  color,
-  setColor,
-}) => {
-  
-  const [allLabels, setAllLabels] = useState<LabelProps[]>([]);
-  useEffect(() => {
-    fetchLabels(
-      localStorage.getItem("groupId"),
-      localStorage.getItem("grouptoken")
-    );
-  });
-  */
-
-/*
+  label,
+}: LabelProps) => {
   return (
-    <div className="grid-container">
+    <div>
       <Container>
-        <Jumbotron>
-          <div className="grid-item1">
-            <h1>{name}</h1>
-          </div>
-          <div className="grid-item2">
-            <h4>#{id}</h4>
-          </div>
-          <p>{description}</p>
-        </Jumbotron>
+        <div className="grid-item1">
+          <h1>{label.name}</h1>
+        </div>
+        <h3>
+          Color:
+          {" " + label.color}
+        </h3>
       </Container>
     </div>
   );
-};*/
+};
+
+/**
+ * Props for the LabeListView
+ */
+export interface LabelListViewProps {
+  /**
+   * The ads to display in the list view
+   */
+  labels: Label[];
+}
+
+export const LabelListView: FunctionComponent = ({}) => {
+  const [allLabels, setAllLabels] = useState<Label[]>([]);
+  //const { id } = useContext(ProjectContext);
+  const id = localStorage.getItem("id");
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (id != null && token != null) {
+      fetchLabels(parseInt(id), token).then((items) => setAllLabels(items));
+      //console.log(fetchLabels(parseInt(id), token));
+      //console.log(fetchProject(parseInt(id), token));
+    }
+  }, []);
+
+  return (
+    <div>
+      {allLabels.map((item) => {
+        return <LabelView label={item} />;
+      })}
+    </div>
+  );
+};

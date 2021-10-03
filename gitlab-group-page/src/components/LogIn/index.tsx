@@ -34,8 +34,8 @@ function LogIn() {
     );
     //temp kan lagres om en vil- jsonobjekt
     localStorage.setItem("Group Information", JSON.stringify(values));
-    localStorage.setItem("groupid", Object(values)["groupid"]);
-    localStorage.setItem("grouptoken", Object(values)["grouptoken"]);
+    localStorage.setItem("id", Object(values)["groupid"]);
+    localStorage.setItem("token", Object(values)["grouptoken"]);
     setId(Object(values)["groupid"]);
     setName(temp.name);
     setDescription(temp.description);

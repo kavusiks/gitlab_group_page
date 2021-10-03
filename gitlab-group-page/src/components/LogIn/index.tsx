@@ -16,7 +16,7 @@ function LogIn() {
       !(localStorage.getItem("Group ID") === null) &&
       !(localStorage.getItem("Group Access Token") === null)
     ) {
-      history.push("/labels-page");
+      history.push("/labels");
     } else {
       history.push("/");
     }

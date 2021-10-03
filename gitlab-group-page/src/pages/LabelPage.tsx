@@ -29,8 +29,6 @@ export const LabelPage: FunctionComponent = () => {
      */
     if (!sessionStorage.getItem("ProjectId")) {
       sessionStorage.setItem("ProjectName", name);
-      console.log("DEN ER: ", description);
-      console.log("name er", name);
       sessionStorage.setItem("ProjectDescription", description);
       sessionStorage.setItem("ProjectId", id.toString());
     }
@@ -47,7 +45,7 @@ export const LabelPage: FunctionComponent = () => {
       localStorage.removeItem("Group Access Token");
       history.push("/");
     } else {
-      history.push("/labels-page");
+      history.push("/labels");
     }
   };
 

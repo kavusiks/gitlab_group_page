@@ -20,10 +20,10 @@ function App() {
         >
           <Switch>
 
-            <Route path="/labels-page">
+            <Route path="/labels">
               <LabelPage />
             </Route>
-            <Route path="/issues-page">
+            <Route path="/issues">
               <IssuePage />
             </Route>
             <Route path="/">

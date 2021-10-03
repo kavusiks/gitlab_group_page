@@ -27,10 +27,10 @@ export const LabelPage: FunctionComponent = () => {
      * refreshes the page which will reset data in context. It will only be saved if the
      * values are not default values.
      */
-    if (id != 0) localStorage.setItem("ProjectId", id.toString());
+    if (id !== 0) localStorage.setItem("ProjectId", id.toString());
 
-    if (name != "") localStorage.setItem("ProjectName", name);
-    if (description != "")
+    if (name !== "") localStorage.setItem("ProjectName", name);
+    if (description !== "")
       localStorage.setItem("ProjectDescription", description);
   });
 

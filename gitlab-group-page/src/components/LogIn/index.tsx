@@ -11,6 +11,10 @@ import image from "../../assets/img/teaser-gitlab-cover.png";
 function LogIn() {
   const history = useHistory();
 
+  /**
+   * On load it will check if something is saved in localstorage, if so 
+   * the user will be sent to the page with the labels. 
+   */
   useEffect(() => {
     if (
       !(localStorage.getItem("Group ID") === null) &&
@@ -36,6 +40,12 @@ function LogIn() {
     initialState
   );
 
+  /**
+   * Method that sets the localstorage based on information that is written by the user. 
+   * After this it will do an API call with provided information. 
+   * It will do three API calls. 
+   * For each time it will also set some information in the sessionStorage. 
+   *  */ 
   async function loginUserCallBack() {
     localStorage.setItem("Group ID", Object(values)["groupid"]);
     localStorage.setItem("Group Access Token", Object(values)["grouptoken"]);

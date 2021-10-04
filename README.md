@@ -92,8 +92,8 @@ Vi har snapshot-tester av noen av komponentene. I tillegg testes noen av element
 
 Webapplikasjonen er deployet på IDI sine servere og på gitlab pages (foreløpig):
 
-- https://it2810-29.idi.ntnu.no
-- https://it2810-h21.pages.stud.idi.ntnu.no/team-29/gitlab-group-page/
+- http://it2810-29.idi.ntnu.no
+- ~~https://it2810-h21.pages.stud.idi.ntnu.no/team-29/gitlab-group-page/~~
 
 Applikasjonen blir deployet til Pages ved hver commit.
 

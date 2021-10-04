@@ -1,4 +1,5 @@
 import { FunctionComponent, useEffect, useState } from "react";
+import { fetchIssues, fetchLabels } from "../../core/APIfunction";
 
 import Label from "../../models/label";
 import "./index.css";
@@ -61,18 +62,49 @@ export const LabelListView: FunctionComponent = () => {
   const [allLabels, setAllLabels] = useState<Label[]>([]);
 
   const labels = sessionStorage.getItem("Labels");
+  /**
+   * Method used to update session storage.
+   * Session storage needs to be updated when the
+   * app is opened in a new session.
+   */
+  const updateLabelsWhenNewTab = async () => {
+    const token = localStorage.getItem("Group Access Token");
+    const id = localStorage.getItem("Group ID");
+    if (token != null && id != null) {
+      const tempLabelsData = await fetchLabels(parseInt(id), token);
+      sessionStorage.setItem("Labels", tempLabelsData);
+      const tempIssuesData = await fetchIssues(parseInt(id), token);
+      sessionStorage.setItem("Issues", tempIssuesData);
+    }
+  };
 
+  /**
+   * Use data from session storage it it exists.
+   * Call on updateLabelsWhenNewTab() if no labels
+   * exists in session storage. This occur when app is opened
+   * in a new seesion for the first time.
+   */
   useEffect(() => {
     if (labels != null) {
       setAllLabels(JSON.parse(labels));
+    } else if (!instanceOfLabelList(allLabels)) {
+      updateLabelsWhenNewTab();
     }
+    //avoiding to put 'allIssues' in dependecies to avoid unnecessary
+    //rerenders on first run when rab is not refreshed
+    // eslint-disable-next-line
   }, [labels]);
+
+  function instanceOfLabelList(object: any): object is LabelListViewProps {
+    return "labels" in object;
+  }
 
   return (
     <div className="grid-container">
       {allLabels.map((item) => {
         return <LabelView label={item} />;
       })}
+      ;
     </div>
   );
 };

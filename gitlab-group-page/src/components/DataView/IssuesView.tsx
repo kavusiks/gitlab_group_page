@@ -3,6 +3,7 @@ import { FunctionComponent, useEffect, useState } from "react";
 import Issue from "../../models/issue";
 import "./index.css";
 import image from "../../assets/img/logo-extra-whitespace.png";
+import { fetchIssues, fetchLabels } from "../../core/APIfunction";
 
 /**
  * Props to pass IssueView component
@@ -59,17 +60,49 @@ export const IssueListView: FunctionComponent = () => {
 
   const issues = sessionStorage.getItem("Issues");
 
+  /**
+   * Method used to update session storage.
+   * Session storage needs to be updated when the
+   * app is opened in a new session.
+   */
+  const updateIssuesWhenNewTab = async () => {
+    const token = localStorage.getItem("Group Access Token");
+    const id = localStorage.getItem("Group ID");
+    if (token != null && id != null) {
+      const tempLabelsData = await fetchLabels(parseInt(id), token);
+      sessionStorage.setItem("Labels", tempLabelsData);
+      const tempIssuesData = await fetchIssues(parseInt(id), token);
+      sessionStorage.setItem("Issues", tempIssuesData);
+    }
+  };
+
+  /**
+   * Use data from session storage it it exists.
+   * Call on updateLabelsWhenNewTab() if no issues
+   * exists in session storage. This occur when app is opened
+   * in a new seesion for the first time.
+   */
   useEffect(() => {
     if (issues != null) {
       setAllIssues(JSON.parse(issues));
+    } else if (!instanceOfIssueList(allIssues)) {
+      console.log(instanceOfIssueList(allIssues));
+      updateIssuesWhenNewTab();
     }
+    //avoiding to put 'allIssues' in dependecies to avoid unnecessary
+    //rerenders on first run when rab is not refreshed
+    // eslint-disable-next-line
   }, [issues]);
 
+  function instanceOfIssueList(object: any): object is IssueListViewProps {
+    return "issues" in object;
+  }
   return (
     <div className="grid-container issue-grid-container">
       {allIssues.map((item) => {
         return <IssueView issue={item} />;
       })}
+      ;
     </div>
   );
 };

@@ -11,7 +11,7 @@ import { LabelListView } from "../components/DataView/LabelView";
 import { InfoView } from "../components/InfoView";
 import NavigationBar from "../components/NavigationBar";
 import { ProjectContext } from "../context/ProjectContext";
-import { fetchProject } from "../core/APIfunction";
+import { fetchIssues, fetchLabels, fetchProject } from "../core/APIfunction";
 import "./index.css";
 
 export const LabelPage: FunctionComponent = () => {
@@ -35,10 +35,10 @@ export const LabelPage: FunctionComponent = () => {
   });
 
   /**
-   * Method for switching routes. 
+   * Method for switching routes.
    * Checks if it is anything in localStorage and checks if the API is still valid.
-   * If the token is expired the user will be redirected back to the login page. 
-   * This will be run on load. 
+   * If the token is expired the user will be redirected back to the login page.
+   * This will be run on load.
    */
   const switchRoutes = () => {
     isValidAPI();
@@ -56,7 +56,7 @@ export const LabelPage: FunctionComponent = () => {
   };
 
   /**
-   * Function to check if the token saved in localstorage is valid. 
+   * Function to check if the token saved in localstorage is valid.
    * Based on the returned message the validAPI will be set.
    */
   async function isValidAPI() {
@@ -75,8 +75,20 @@ export const LabelPage: FunctionComponent = () => {
     } else {
       console.log("Something is wrong");
     }
+    const labels = sessionStorage.getItem("Labels");
+    if (labels == null) {
+      const token = localStorage.getItem("Group Access Token");
+      const id = localStorage.getItem("Group ID");
+      if (token != null && id != null) {
+        const tempLabelsData = await fetchLabels(parseInt(id), token);
+        sessionStorage.setItem("Labels", tempLabelsData);
+        const tempIssuesData = await fetchIssues(parseInt(id), token);
+        sessionStorage.setItem("Issues", tempIssuesData);
+        console.log("hjkh");
+      }
+    }
   }
-  
+
   return (
     <div className="page-wrapper">
       <NavigationBar></NavigationBar>

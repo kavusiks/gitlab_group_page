@@ -11,7 +11,7 @@ import { IssueListView } from "../components/DataView/IssuesView";
 import { InfoView } from "../components/InfoView";
 import NavigationBar from "../components/NavigationBar";
 import { ProjectContext } from "../context/ProjectContext";
-import { fetchProject } from "../core/APIfunction";
+import { fetchIssues, fetchLabels, fetchProject } from "../core/APIfunction";
 
 export const IssuePage: FunctionComponent = () => {
   const { id, name, description } = useContext(ProjectContext);
@@ -52,6 +52,16 @@ export const IssuePage: FunctionComponent = () => {
       setValidAPI(true);
     } else {
       console.log("Something is wrong");
+    }
+    if (!sessionStorage.getItem("Labels")) {
+      const token = localStorage.getItem("Group Access Token");
+      const id = localStorage.getItem("Group ID");
+      if (token != null && id != null) {
+        const tempLabelsData = await fetchLabels(parseInt(id), token);
+        sessionStorage.setItem("Labels", tempLabelsData);
+        const tempIssuesData = await fetchIssues(parseInt(id), token);
+        sessionStorage.setItem("Issues", tempIssuesData);
+      }
     }
   }
 

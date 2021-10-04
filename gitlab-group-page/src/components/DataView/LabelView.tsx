@@ -1,4 +1,5 @@
 import { FunctionComponent, useEffect, useState } from "react";
+import { fetchIssues, fetchLabels } from "../../core/APIfunction";
 
 import Label from "../../models/label";
 import "./index.css";
@@ -61,18 +62,37 @@ export const LabelListView: FunctionComponent = () => {
   const [allLabels, setAllLabels] = useState<Label[]>([]);
 
   const labels = sessionStorage.getItem("Labels");
+  const updateLabelsWhenNewTab = async () => {
+    const token = localStorage.getItem("Group Access Token");
+    const id = localStorage.getItem("Group ID");
+    if (token != null && id != null) {
+      const tempLabelsData = await fetchLabels(parseInt(id), token);
+      sessionStorage.setItem("Labels", tempLabelsData);
+      const tempIssuesData = await fetchIssues(parseInt(id), token);
+      sessionStorage.setItem("Issues", tempIssuesData);
+    }
+  };
 
   useEffect(() => {
     if (labels != null) {
       setAllLabels(JSON.parse(labels));
     }
+    if (!instanceOfLabelList(allLabels)) updateLabelsWhenNewTab();
+    //avoiding to put 'allLabel' in dependecies to avoid unnecessary
+    //rerenders on first run when rab is not refreshed
+    // eslint-disable-next-line
   }, [labels]);
+
+  function instanceOfLabelList(object: any): object is LabelListViewProps {
+    return "labels" in object;
+  }
 
   return (
     <div className="grid-container">
       {allLabels.map((item) => {
         return <LabelView label={item} />;
       })}
+      ;
     </div>
   );
 };

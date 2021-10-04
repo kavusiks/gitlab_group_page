@@ -59,6 +59,12 @@ export const IssueListView: FunctionComponent = () => {
   const [allIssues, setAllIssues] = useState<Issue[]>([]);
 
   const issues = sessionStorage.getItem("Issues");
+
+  /**
+   * Method used to update session storage.
+   * Session storage needs to be updated when the
+   * app is opened in a new session.
+   */
   const updateIssuesWhenNewTab = async () => {
     const token = localStorage.getItem("Group Access Token");
     const id = localStorage.getItem("Group ID");
@@ -70,12 +76,19 @@ export const IssueListView: FunctionComponent = () => {
     }
   };
 
+  /**
+   * Use data from session storage it it exists.
+   * Call on updateLabelsWhenNewTab() if no issues
+   * exists in session storage. This occur when app is opened
+   * in a new seesion for the first time.
+   */
   useEffect(() => {
     if (issues != null) {
       setAllIssues(JSON.parse(issues));
+    } else if (!instanceOfIssueList(allIssues)) {
+      console.log(instanceOfIssueList(allIssues));
+      updateIssuesWhenNewTab();
     }
-    if (!instanceOfIssueList(allIssues)) updateIssuesWhenNewTab();
-
     //avoiding to put 'allIssues' in dependecies to avoid unnecessary
     //rerenders on first run when rab is not refreshed
     // eslint-disable-next-line

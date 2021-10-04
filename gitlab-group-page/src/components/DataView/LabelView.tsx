@@ -62,6 +62,11 @@ export const LabelListView: FunctionComponent = () => {
   const [allLabels, setAllLabels] = useState<Label[]>([]);
 
   const labels = sessionStorage.getItem("Labels");
+  /**
+   * Method used to update session storage.
+   * Session storage needs to be updated when the
+   * app is opened in a new session.
+   */
   const updateLabelsWhenNewTab = async () => {
     const token = localStorage.getItem("Group Access Token");
     const id = localStorage.getItem("Group ID");
@@ -73,12 +78,19 @@ export const LabelListView: FunctionComponent = () => {
     }
   };
 
+  /**
+   * Use data from session storage it it exists.
+   * Call on updateLabelsWhenNewTab() if no labels
+   * exists in session storage. This occur when app is opened
+   * in a new seesion for the first time.
+   */
   useEffect(() => {
     if (labels != null) {
       setAllLabels(JSON.parse(labels));
+    } else if (!instanceOfLabelList(allLabels)) {
+      updateLabelsWhenNewTab();
     }
-    if (!instanceOfLabelList(allLabels)) updateLabelsWhenNewTab();
-    //avoiding to put 'allLabel' in dependecies to avoid unnecessary
+    //avoiding to put 'allIssues' in dependecies to avoid unnecessary
     //rerenders on first run when rab is not refreshed
     // eslint-disable-next-line
   }, [labels]);
